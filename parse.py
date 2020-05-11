@@ -10,7 +10,7 @@ def is_initialization(line):
     return True
 
 def is_correct_node(line, name):
-    if(re.search("\[" + name, line) == None):
+    if(re.search("\[" + name + "[^0-9]", line) == None):
         return False
     return True
 
@@ -42,5 +42,8 @@ else:
         print(str(i) + " - " + l[0][i])
     option = int(input("> "))
     plt.ylabel(l[0][option])
-    plt.plot([float(x[option]) for x in l[1:] if x != []])
+    data = [float(x[option]) for x in l[1:] if x != []]
+    print("sum: " + str(sum(data)))
+    plt.plot(data)
+    plt.savefig("shadowgraph.png")
     plt.show()
